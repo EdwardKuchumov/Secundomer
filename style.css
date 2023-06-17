@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+body{
+    background-color: #000;
+    font-family: 'Sora';
+    max-width: 1440px;
+    height: 100%;
+    color: #000000;
+}
+.wrapper{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: url('https://p4.wallpaperbetter.com/wallpaper/636/385/217/stopwatch-wallpaper-preview.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    
+}
+#container{
+    height: 100%;
+    padding: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    -webkit-backdrop-filter: blur(5px);
+}
