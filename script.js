@@ -117,12 +117,13 @@ buttonStart.addEventListener('click', function(){
         inrervalSecundomer()
 
     if (buttonPause.style.opacity == '0.3'){
-        alert('Hrllo')
-    }else{
-        buttonClear.style.opacity = '1'
-        buttonStart.style.opacity = '0.3'
-        buttonPause.style.opacity = '1'
-        inrervalSecundomer()
+        buttonStart.addEventListener('click', ()=>{
+            buttonClear.style.opacity = '1'
+            buttonStart.style.opacity = '0.3'
+            buttonPause.style.opacity = '1'
+            inrervalSecundomer()
+        })
+
     }
 
 })
