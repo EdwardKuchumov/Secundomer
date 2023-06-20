@@ -16,7 +16,7 @@ const tablo = 0,
     pauseButton = 0,
     pauseButtonText = 'Pause',
     stopButton = 0,
-    stopButtonText = 'Stop'
+    stopButtonText = 'Clear'
 // Создаем табло секундомера
 const createElementTablo = (newTablo)=>{
     newTablo = document.createElement('div');
@@ -44,7 +44,7 @@ const createButton = (newButton, value)=>{
     newButton.style.height = '50px'
     newButton.style.fontSize = '18px'
     newButton.style.borderRadius = '5px'
-    newButton.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+    newButton.style.backgroundColor = 'rgba(255, 255, 255, 0.5)'
     newButton.innerHTML = value
     newButton.className = value
     contApp.append(newButton)
@@ -55,43 +55,74 @@ createButton(stopButton, stopButtonText)
 // Находим кнопки + события
 const buttonStart = document.querySelector('.Start');
 const buttonPause = document.querySelector('.Pause');
-const buttonStop = document.querySelector('.Stop');
-buttonStop.style.opacity = '0.5'
-
-buttonStart.addEventListener('click', function(){
-        buttonStop.style.opacity = '1'
-        buttonStart.style.opacity = '0.5'
-        let milisec = 0
-        let secunds = 0
-        let minutes = 0
-        const interMiliSec = setInterval(()=>{
-            if(milisec<=100){
-                milisec++
-                tabloSecundomer.innerHTML = secunds+':'+milisec
-            } else{
-                milisec = 0
-                milisec++
-                tabloSecundomer.innerHTML = secunds+':'+milisec
-            }
-
-        }, 10)
-        const interSecunds = setInterval(()=>{
+const buttonClear = document.querySelector('.Clear');
+buttonClear.style.opacity = '0.3'
+buttonPause.style.opacity = '0.3'
+// Функция с условиями
+let milisec = 0
+let secunds = 0
+let minutes = 0
+const inrervalSecundomer = ()=>{
+    const interMiliSec = setInterval(()=>{
+        if(milisec<=100){
+            milisec++
+            tabloSecundomer.innerHTML = minutes+':'+secunds+':'+milisec
+        } else{
+            milisec = 0
+            milisec++
+            tabloSecundomer.innerHTML = minutes+':'+secunds+':'+milisec
+        }
+    }, 10)
+    const interSecunds = setInterval(()=>{
+        if(secunds<=58){
             secunds++
-            console.log(secunds)
-        },1000)
-        const interMinutes = setInterval(()=>{
-            minutes++
-            console.log(secunds)
-        },60000)
-        
-        buttonStop.addEventListener('click', function(){
-            buttonStart.style.opacity = '1'
-            buttonStop.style.opacity = '0.5'
-            tabloSecundomer.innerHTML = '0:0:0'
-            clearInterval(interMiliSec)
-            clearInterval(interSecunds)
-            clearInterval(interMinutes)
-        })
+            tabloSecundomer.innerHTML = minutes+':'+secunds+':'+milisec
+        } else{
+            secunds = 0
+            secunds++
+            tabloSecundomer.innerHTML = minutes+':'+secunds+':'+milisec
+        }
+    },1000)
+    const interMinutes = setInterval(()=>{
+        minutes++
+        console.log(secunds)
+    },60000)
+// Кнопка очистки
+    buttonClear.addEventListener('click', function(){
+        buttonStart.style.opacity = '1'
+        buttonClear.style.opacity = '0.3'
+        buttonPause.style.opacity = '0.3'
+        tabloSecundomer.innerHTML = '0:0:0'
+        milisec = 0
+        secunds = 0
+        minutes = 0
+        clearInterval(interMiliSec)
+        clearInterval(interSecunds)
+        clearInterval(interMinutes)
+    })
+    buttonPause.addEventListener('click', function(){
+        buttonPause.style.opacity = '0.3'
+        buttonStart.style.opacity = '1'
+        buttonClear.style.opacity = '1'
+        clearInterval(interMiliSec)
+        clearInterval(interSecunds)
+        clearInterval(interMinutes)
+    })
+}
+// Кнопка старта с условиями
+buttonStart.addEventListener('click', function(){
+        buttonClear.style.opacity = '1'
+        buttonStart.style.opacity = '0.3'
+        buttonPause.style.opacity = '1'
+        inrervalSecundomer()
 
+    if (buttonPause.style.opacity == '0.3'){
+        alert('Hrllo')
+    }else{
+        buttonClear.style.opacity = '1'
+        buttonStart.style.opacity = '0.3'
+        buttonPause.style.opacity = '1'
+        inrervalSecundomer()
+    }
 
 })
